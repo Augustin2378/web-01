@@ -43,4 +43,4 @@
     // TODO #template-literals:  use template literals (backquotes)
     window.location = gamePage + "?name=" + name + "&size=" + size;
   }
-})();
+
