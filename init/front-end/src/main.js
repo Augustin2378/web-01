@@ -5,6 +5,8 @@ import { GameComponent } from "./app/scripts/game";
 import { ScoreComponent } from "./app/scripts/score";
 // TODO #import-components: use ES named imports to import WelcomeComponent, GameComponent a ScoreComponent
 // TODO #import-css: use ES side-effect imports to import styles/style.css
+import "/node_modules/bootstrap/dist/css/bootstrap.css";
+import "./app/styles/style.css";
 
 const outlet = document.querySelector("#content-outlet");
 const router = new Router(outlet);
