@@ -1,6 +1,6 @@
 // TODO #import-html: use ES default imports to import game.html as template
 // TODO #export-functions: remove the IIFE
-(function () {
+
   // TODO #export-functions: export function ScoreComponent
   // TODO #class: use the ES6 class keyword
   /* class ScoreComponent constructor */

@@ -4,6 +4,7 @@
   "description": "A memory game based on memes ¯\\(ツ)\\/¯.",
   "main": "index.js",
   "scripts": {
+    "build": "webpack build --mode=production --no-devtool",
     "start": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
