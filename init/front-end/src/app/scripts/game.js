@@ -52,41 +52,33 @@ let CARD_TEMPLATE = ""
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.init */
-  init() {
-    // fetch the cards configuration from the server
-    this.fetchConfig(
+    init() {
+      // fetch the cards configuration from the server
+      this.fetchConfig(
+          (config) => {
+            this._config = config;
+            this._boardElement = document.querySelector(".cards");
 
-      (config) => {
-        this._config = config;
-        this._boardElement = document.querySelector(".cards");
+            // create cards out of the config
+            this._cards = [];
+            this._cards = Object.keys(this._config.ids).map(i => {
+              return new CardComponent(this._config.ids[i]);
+            });
 
-        // create cards out of the config
-        this._cards = [];
-        // TODO #functional-programming: use Array.map() instead.
-        for (let i in this._config.ids) {
-          this._cards[i] = new CardComponent(this._config.ids[i]);
-        }
 
-        // TODO #functional-programming: use Array.forEach() instead.
-        // TODO #let-const: replace var with let.
-        for (let i in this._cards) {
-          let card = this._cards[i];
+            this._cards.forEach(card => {
+              this._boardElement.appendChild(card.getElement());
+              card.getElement().addEventListener(
+                  "click",
+                  () => {
+                    this._flipCard(card);
+                  });
+            });
 
-          // TODO #let-const: extract function _appendCard (ie: copy its body here and remove the function)
-          this._boardElement.appendChild(card.getElement());
-
-          card.getElement().addEventListener(
-              "click",
-              () => {
-                this._flipCard(card);
-              }
-          );
-        }
-
-        this.start();
-      }
-    );
-  };
+            this.start();
+          }
+      );
+    }
   // TODO #class: turn function into a method of GameComponent
 
   /* method GameComponent._appendCard */
