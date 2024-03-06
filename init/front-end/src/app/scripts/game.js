@@ -13,6 +13,7 @@ import card9 from "/src/assets/cards/card-9.png";
 import { Component } from "./components";
 import template from "/src/app/views/game.html";
 import { parseUrl } from "./utils";
+import config from "bootstrap/js/src/util/config";
 let CARD_TEMPLATE = ""
   .concat('<main class="card-cmp">')
   .concat('  <div class="card-wrapper">')
@@ -52,11 +53,9 @@ let CARD_TEMPLATE = ""
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.init */
-    init() {
+    async init() {
       // fetch the cards configuration from the server
-      this.fetchConfig(
-          (config) => {
-            this._config = config;
+            this._config = await this.fetchConfig();
             this._boardElement = document.querySelector(".cards");
 
             // create cards out of the config
@@ -77,8 +76,8 @@ let CARD_TEMPLATE = ""
 
             this.start();
           }
-      );
-    }
+      ;
+
   // TODO #class: turn function into a method of GameComponent
 
   /* method GameComponent._appendCard */
@@ -103,39 +102,17 @@ let CARD_TEMPLATE = ""
       },
       1000
     );
-  };
+  }
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.fetchConfig */
-  fetchConfig(cb) {
-    let xhr =
-      typeof XMLHttpRequest != "undefined"
-        ? new XMLHttpRequest()
-        : new ActiveXObject("Microsoft.XMLHTTP");
+    async fetchConfig() {
+      const response = await fetch(
+          `${environment.api.host}/board?size=${this._size}`
+      );
+      return response.json();
+    }
 
-    // TODO #template-literals:  use template literals (backquotes)
-    //xhr.open("get", environment.api.host + "/board?size=" + this._size, true);
-    xhr.open("get", `${environment.api.host}/board?size=${this._size}`, true);
-
-
-
-    xhr.onreadystatechange = () => {
-      let status;
-      let data;
-      // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
-      if (xhr.readyState == 4) {
-        // `DONE`
-        status = xhr.status;
-        if (status == 200) {
-          data = JSON.parse(xhr.responseText);
-          cb(data);
-        } else {
-          throw new Error(status);
-        }
-      }
-    };
-    xhr.send();
-  };
 
   // TODO #class: turn function into a method of GameComponent
   /* method GameComponent.goToScore */

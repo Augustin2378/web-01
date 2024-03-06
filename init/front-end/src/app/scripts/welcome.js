@@ -2,8 +2,7 @@
 
 import template from "/src/app/views/welcome.html";
 import {Component} from "./components";
-  // TODO #export-functions: export function WelcomeComponent
-  // TODO #class: use the ES6 class keyword
+
   /* class WelcomeComponent constructor  */
   export class WelcomeComponent extends Component {
     constructor() {
@@ -11,12 +10,10 @@ import {Component} from "./components";
       this.template = template;
     }
 
-    // TODO #extends: call super(template)
-    // TODO #import-html: assign template to this.template
 
 
     // put component in global scope, to be runnable right from the HTML.
-    // TODO #class: turn function into a method of WelcomeComponent
+
     /* method WelcomeComponent.init */
 
     init() {
