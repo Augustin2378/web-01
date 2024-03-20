@@ -4,18 +4,12 @@ import template from "../welcome/welcome.component.html";
 import {Component} from "../../scripts/components";
 import "./welcome.component.css";
 
-  /* class WelcomeComponent constructor  */
   export class WelcomeComponent extends Component {
     constructor() {
       super(template)
       this.template = template;
     }
 
-
-
-    // put component in global scope, to be runnable right from the HTML.
-
-    /* method WelcomeComponent.init */
 
     init() {
       let form = document.querySelector("form.form-signin");
@@ -32,7 +26,6 @@ import "./welcome.component.css";
               let size = parseInt(event.srcElement.querySelector("#size").value);
 
               let gamePage = "./#game";
-              // TODO #template-literals:  use template literals (backquotes)
               window.location = `${gamePage}?name=${name}&size=${size}`;
             }
           },
@@ -43,6 +36,6 @@ import "./welcome.component.css";
     };
   }
 
-    // TODO #class: turn function into a method of WelcomeComponent
+
 
 

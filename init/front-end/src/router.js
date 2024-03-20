@@ -1,10 +1,4 @@
-// TODO #export-router: remove this IIFE
 
-  /**
-   * Append an html template to the document, at the given outlet.
-   * @param HTMLElement outlet the location on the document to add the template
-   * @param HTMLElement template the template to append
-   */
   function renderTemplate(outlet, template) {
     while (outlet.lastChild) {
             outlet.removeChild(outlet.lastChild);
@@ -12,11 +6,6 @@
         outlet.appendChild(template);
   }
 
-  /**
-   * Create a new router. This router will load components into the given outlet.
-   * @param {HTMLElement} outlet The element to put components into.
-   */
-  // TODO #export-router: export this function
   export function Router(outlet) {
     this._components = {};
     this._templates = {};
@@ -29,17 +18,10 @@
       this._onLocationChanged(event.newURL)
     );
   }
-  // TODO #export-router: remove this assignation
 
 
-  /**
-   * Bind a component ot be displayed when the registered URL is reached.
-   * @param hash
-   * @param componentEntry
-   * @returns {Router}
-   */
   Router.prototype.register = function (hash, componentEntry) {
-    var path = `#${hash}`;
+    let path = `#${hash}`;
     if (!componentEntry) {
       throw new TypeError(
         `provided arg should be a Component. Got: ${componentEntry}`
@@ -57,7 +39,7 @@
     if (componentEntry.templateUrl) {
       if (!this._templates[componentEntry.templateUrl]) {
         this._templates[componentEntry.templateUrl] = true;
-        var _this = this;
+        let _this = this;
         _fetchTemplate(componentEntry.templateUrl, function (template) {
           componentEntry.template = template;
           if (_getRouteHash(window.location.href) === path) {
@@ -77,11 +59,11 @@
   };
 
   Router.prototype._renderComponent = function (componentEntry) {
-    var component = new componentEntry.component();
+    let component = new componentEntry.component();
 
-    var outlet = this._outlet;
+    let outlet = this._outlet;
 
-    var element = document.createElement("template");
+    let element = document.createElement("template");
     element.innerHTML =
       componentEntry.template ||
       component.template ||
@@ -98,8 +80,8 @@
       return;
     }
 
-    var path = _getRouteHash(loc);
-    var componentEntry = this._components[path];
+    let path = _getRouteHash(loc);
+    let componentEntry = this._components[path];
 
     if (componentEntry) {
       this._renderComponent(componentEntry);
@@ -115,7 +97,7 @@
   }
 
   function _fetchTemplate(templateUrl, cb) {
-    var xhr =
+    let xhr =
       typeof XMLHttpRequest != "undefined"
         ? new XMLHttpRequest()
         : new ActiveXObject("Microsoft.XMLHTTP");
@@ -123,8 +105,8 @@
     xhr.open("get", templateUrl, true);
 
     xhr.onreadystatechange = function () {
-      var status;
-      var data;
+      let status;
+      let data;
       // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
       if (xhr.readyState == 4) {
         // `DONE`

@@ -15,10 +15,6 @@ import { CardComponent } from "./card/card.component";
 import template from "./game.component.html";
 import "./game.component.css";
 import { parseUrl } from "../../scripts/utils";
-import config from "bootstrap/js/src/util/config";
-
-
-// TODO #export-functions: remove the IIFE fait
 
   let environment = {
     api: {
@@ -26,10 +22,7 @@ import config from "bootstrap/js/src/util/config";
     },
   };
 
-  // TODO #export-functions: export function GameComponent
-  // TODO #class: use the ES6 class keyword
-  // TODO #extends: extend Component
-  /* class GameComponent constructor */
+
   export class GameComponent extends Component {
     constructor(){
       super(template)
@@ -43,12 +36,6 @@ import config from "bootstrap/js/src/util/config";
   }
 
 
-
-  // TODO #export-functions: remove this line
-  // put component in global scope, to be runnable right from the HTML.
-
-  // TODO #class: turn function into a method of GameComponent
-  /* method GameComponent.init */
     async init() {
       // fetch the cards configuration from the server
             this._config = await this.fetchConfig();
@@ -74,17 +61,10 @@ import config from "bootstrap/js/src/util/config";
           }
       ;
 
-  // TODO #class: turn function into a method of GameComponent
 
-  /* method GameComponent._appendCard */
-
-
-  // TODO #class: turn function into a method of GameComponent
-  /* method GameComponent.start */
   start() {
     this._startTime = Date.now();
     let seconds = 0;
-    // TODO #template-literals:  use template literals (backquotes)
     document.querySelector("nav .navbar-title").textContent =
         `Player ${this._name} .Elapsed time : ${seconds++}`;
 
@@ -92,7 +72,6 @@ import config from "bootstrap/js/src/util/config";
     this._timer = setInterval(
 
       () => {
-        // TODO #template-literals:  use template literals (backquotes)
         document.querySelector("nav .navbar-title").textContent =
             `Player ${this._name} .Elapsed time : ${seconds++}`;
       },
@@ -100,8 +79,6 @@ import config from "bootstrap/js/src/util/config";
     );
   }
 
-  // TODO #class: turn function into a method of GameComponent
-  /* method GameComponent.fetchConfig */
     async fetchConfig() {
       const response = await fetch(
           `${environment.api.host}/board?size=${this._size}`
@@ -110,8 +87,6 @@ import config from "bootstrap/js/src/util/config";
     }
 
 
-  // TODO #class: turn function into a method of GameComponent
-  /* method GameComponent.goToScore */
   goToScore() {
     let timeElapsedInSeconds = Math.floor(
       (Date.now() - this._startTime) / 1000
@@ -122,15 +97,12 @@ import config from "bootstrap/js/src/util/config";
 
       () =>{
         let scorePage = "./#score";
-        // TODO #template-literals:  use template literals (backquotes)
 
         window.location =`${scorePage}?name=${this._name}&size=${this._size}&time=${timeElapsedInSeconds}`;
       },750
     );
   };
 
-  // TODO #class: turn function into a method of GameComponent
-  /* method GameComponent._flipCard */
   _flipCard(card) {
     if (this._busy) {
       return;
@@ -140,23 +112,16 @@ import config from "bootstrap/js/src/util/config";
       return;
     }
 
-    // flip the card
     card.flip();
 
-    // if flipped first card of the pair
     if (!this._flippedCard) {
-      // keep this card flipped and wait for the second card of the pair
       this._flippedCard = card;
     } else {
-      // second card of the pair flipped...
-
-      // if cards are the same
       if (card.equals(this._flippedCard)) {
         this._flippedCard.matched = true;
         card.matched = true;
         this._matchedPairs += 1;
 
-        // reset flipped card for the next turn.
         this._flippedCard = null;
 
         if (this._matchedPairs === this._size) {
@@ -165,17 +130,13 @@ import config from "bootstrap/js/src/util/config";
       } else {
         this._busy = true;
 
-        // cards did not match
-        // wait a short amount of time before hiding both cards
         setTimeout(
 
           () => {
-            // hide the cards
             this._flippedCard.flip();
             card.flip();
             this._busy = false;
 
-            // reset flipped card for the next turn.
             this._flippedCard = null;
           },
           500
@@ -185,8 +146,7 @@ import config from "bootstrap/js/src/util/config";
   };
 }
 
-  // TODO #card-component: Change images location to /app/components/game/card/assets/***.png
-  // TODO #import-assets: use ES default import to import images.
+
   let CARDS_IMAGE = [
     back,
     card0,
@@ -201,8 +161,5 @@ import config from "bootstrap/js/src/util/config";
     card9,
   ];
 
-  // TODO #class: use the ES6 class keyword
-  // TODO #extends: extends Component
-  /* class CardComponent constructor */
 
 
