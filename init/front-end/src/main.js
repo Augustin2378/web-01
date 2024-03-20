@@ -12,6 +12,10 @@ import { NavbarComponent } from "./app/components/navbar/navbar.components";
 
 customElements.define("my-navbar", NavbarComponent);
 
+import { FooterComponent } from "./app/components/footer/footer.component";
+
+customElements.define("my-footer", FooterComponent);
+
 const outlet = document.querySelector("#content-outlet");
 const router = new Router(outlet);
 router
