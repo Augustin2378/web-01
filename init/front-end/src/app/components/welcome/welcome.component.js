@@ -1,7 +1,8 @@
 
 
-import template from "/src/app/views/welcome.html";
-import {Component} from "./components";
+import template from "../welcome/welcome.component.html";
+import {Component} from "../../scripts/components";
+import "./welcome.component.css";
 
   /* class WelcomeComponent constructor  */
   export class WelcomeComponent extends Component {
